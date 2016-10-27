@@ -35,6 +35,8 @@ with open(args.input) as csvfile:
                 print ",".join(ftline)
                 ftline = []
         else:
+            # If it's not Tone, Don't do anything now, just add an empty line
+            # This will have to handle DCS stuff one day.
             print str(numlines+1) + ",,,,,,,,,,,,,,0,,0"
 
 for line in range(numlines+1, 501):
