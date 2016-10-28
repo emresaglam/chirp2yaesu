@@ -1,4 +1,4 @@
-This code converts Chirp export file in CSV format to Yaesu's import CSV format. (I only tested this on FTM-400XDR application)
+This code converts Chirp export file in CSV format to Yaesu's import CSV format. (I only tested this on [FTM-400XDR application](https://www.yaesu.com/indexVS.cfm?cmd=DisplayProducts&ProdCatID=249&encProdID=227201D29C822AEFF8482F3367495319&DivisionID=65&isArchived=0))
 
 Use this code at your own discretion. It's not tested on all Yaesu programs.
 
