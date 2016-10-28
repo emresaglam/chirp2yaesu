@@ -23,7 +23,7 @@ with open(inputFile) as csvfile:
     reader = csv.DictReader(csvfile)
     for row in reader:
         if row["Tone"] == "Tone":
-            numlines = int(row['Location'])+1
+            numlines += 1
             ftline.append(str(numlines))
             ftline.append(row['Frequency'])
             ftline.append('')
