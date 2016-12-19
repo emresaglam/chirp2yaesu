@@ -13,7 +13,7 @@ Use this code at your own discretion. It's not tested on all Yaesu programs.
 # SCREENSHOTS
 
 Chirp Export
-![Chirp Export](http://i.imgur.com/kPHwyOa.png)
+![Chirp Export](http://i.imgur.com/kPHwyOal.png)
 
 # TODO
 
