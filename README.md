@@ -10,7 +10,10 @@ Use this code at your own discretion. It's not tested on all Yaesu programs.
 4. Run it as: python chirp_to_yaesu.py -o Yaesu-import.csv -i Chirp-export.csv
 5. Use Yaesu-import.csv file to import the configuration in the Yaesu's own software.
 
-I'll have some screenshots soon.
+# SCREENSHOTS
+
+Chirp Export
+![Chirp Export](http://i.imgur.com/kPHwyOa.png)
 
 # TODO
 
