@@ -7,7 +7,7 @@ def addEmptyLine(foo, lineNumber):
     return foo
 
 # Adding the command line flags
-parser = argparse.ArgumentParser(description="This tool converts a chirp csv file to a Yaesu importable csv file")
+parser = argparse.ArgumentParser(description="This tool converts a chirp csv file to a Yaesu importable csv file.")
 parser.add_argument('--input', '-i', required = True)
 parser.add_argument('--output', '-o', default="Yaesu-import.csv")
 args = parser.parse_args()
