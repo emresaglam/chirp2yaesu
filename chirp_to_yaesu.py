@@ -37,7 +37,7 @@ with open(inputFile) as csvfile:
             ftline.append(row['Offset'])
             ftline.append(row['Duplex'] + "RPT")
             ftline.append(row['Mode'])
-            ftline.append(row['Name'])
+            ftline.append(row['Name'][0:8])
             if row["Tone"] == "Tone" :
                 ftline.append("TONE ENC")
             else :
