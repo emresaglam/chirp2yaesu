@@ -33,9 +33,20 @@ with open(inputFile) as csvfile:
             numlines += 1
             ftline.append(str(numlines))
             ftline.append(row['Frequency'])
-            ftline.append('')
+            if row['Offset'] == "OFF":
+                ftline.append(row['Frequency'])
+            else :
+                freq = float( row['Frequency'] )
+                if row['Duplex'] == "-" :
+                    freq = freq - float( row['Offset'] )
+                elif row['Duplex'] == "+":
+                    freq = freq + float( row['Offset'] )
+                ftline.append(str(freq))
             ftline.append(row['Offset'])
-            ftline.append(row['Duplex'] + "RPT")
+            if row['Duplex'] in [ '+', '-' ] :
+                ftline.append(row['Duplex'] + "RPT")
+            else :
+                ftline.append( "OFF" )
             ftline.append(row['Mode'])
             ftline.append(row['Name'][0:8])
             if row["Tone"] == "Tone" :
