@@ -29,7 +29,7 @@ else :
 with open(inputFile) as csvfile:
     reader = csv.DictReader(csvfile)
     for row in reader:
-        if row["Tone"] == "Tone":
+        if row["Tone"] == "Tone" or (row['Frequency'] != None and row["Tone"] == ''):
             numlines += 1
             ftline.append(str(numlines))
             ftline.append(row['Frequency'])
@@ -38,7 +38,10 @@ with open(inputFile) as csvfile:
             ftline.append(row['Duplex'] + "RPT")
             ftline.append(row['Mode'])
             ftline.append(row['Name'])
-            ftline.append("TONE ENC")
+            if row["Tone"] == "Tone" :
+                ftline.append("TONE ENC")
+            else :
+                ftline.append("OFF")
             ftline.append(row['rToneFreq'] + " Hz")
             ftline.append(row['DtcsCode'])
             ftline.append("1500 Hz")
