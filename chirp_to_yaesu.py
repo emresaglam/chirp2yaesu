@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 import csv
 import argparse
 
@@ -10,6 +12,7 @@ def addEmptyLine(foo, lineNumber):
 parser = argparse.ArgumentParser(description="This tool converts a chirp csv file to a Yaesu importable csv file.")
 parser.add_argument('--input', '-i', required = True)
 parser.add_argument('--output', '-o', default="Yaesu-import.csv")
+parser.add_argument('--band', '-b', default='A', choices = ['A', 'B'], help='Specify the A or B band')
 args = parser.parse_args()
 
 ftline = []
@@ -17,30 +20,51 @@ chirpFile = []
 numlines = 0
 inputFile = args.input
 outputFile = args.output
+if args.band == 'A':
+    band = "0"
+else :
+    band = "1"
 
 # Open the Chirp file and create the Yaesu formatted array
 with open(inputFile) as csvfile:
     reader = csv.DictReader(csvfile)
     for row in reader:
-        if row["Tone"] == "Tone":
+        if row["Tone"] == "Tone" or (row['Frequency'] != None and row["Tone"] == ''):
             numlines += 1
             ftline.append(str(numlines))
             ftline.append(row['Frequency'])
-            ftline.append('')
+            if row['Offset'] == "OFF":
+                ftline.append(row['Frequency'])
+            else :
+                freq = float( row['Frequency'] )
+                if row['Duplex'] == "-" :
+                    freq = freq - float( row['Offset'] )
+                elif row['Duplex'] == "+":
+                    freq = freq + float( row['Offset'] )
+                ftline.append(str(freq))
             ftline.append(row['Offset'])
-            ftline.append(row['Duplex'] + "RPT")
+            if row['Duplex'] in [ '+', '-' ] :
+                ftline.append(row['Duplex'] + "RPT")
+            else :
+                ftline.append( "OFF" )
             ftline.append(row['Mode'])
-            ftline.append(row['Name'])
-            ftline.append("TONE ENC")
+            ftline.append(row['Name'][0:8])
+            if row["Tone"] == "Tone" :
+                ftline.append("TONE ENC")
+            else :
+                ftline.append("OFF")
             ftline.append(row['rToneFreq'] + " Hz")
             ftline.append(row['DtcsCode'])
             ftline.append("1500 Hz")
             ftline.append("HIGH")
             ftline.append("OFF")
-            ftline.append("25.0KHz")
+            if row['Mode'] == "NFM":
+                ftline.append("12.5KHz")
+            else :
+                ftline.append("25.0KHz")
             ftline.append("0")
             ftline.append(row['Comment'])
-            ftline.append("0")
+            ftline.append(band)
 
             chirpFile.append(ftline)
             ftline = []
