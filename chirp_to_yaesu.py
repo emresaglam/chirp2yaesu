@@ -12,6 +12,7 @@ def addEmptyLine(foo, lineNumber):
 parser = argparse.ArgumentParser(description="This tool converts a chirp csv file to a Yaesu importable csv file.")
 parser.add_argument('--input', '-i', required = True)
 parser.add_argument('--output', '-o', default="Yaesu-import.csv")
+parser.add_argument('--band', '-b', default='A', choices = ['A', 'B'], help='Specify the A or B band')
 args = parser.parse_args()
 
 ftline = []
@@ -19,6 +20,10 @@ chirpFile = []
 numlines = 0
 inputFile = args.input
 outputFile = args.output
+if args.band == 'A':
+    band = "0"
+else :
+    band = "1"
 
 # Open the Chirp file and create the Yaesu formatted array
 with open(inputFile) as csvfile:
@@ -42,7 +47,7 @@ with open(inputFile) as csvfile:
             ftline.append("25.0KHz")
             ftline.append("0")
             ftline.append(row['Comment'])
-            ftline.append("0")
+            ftline.append(band)
 
             chirpFile.append(ftline)
             ftline = []
