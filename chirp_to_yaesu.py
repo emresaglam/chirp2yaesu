@@ -58,7 +58,10 @@ with open(inputFile) as csvfile:
             ftline.append("1500 Hz")
             ftline.append("HIGH")
             ftline.append("OFF")
-            ftline.append("25.0KHz")
+            if row['Mode'] == "NFM":
+                ftline.append("12.5KHz")
+            else :
+                ftline.append("25.0KHz")
             ftline.append("0")
             ftline.append(row['Comment'])
             ftline.append(band)
