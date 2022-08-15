@@ -18,7 +18,7 @@ Chirp Export
 
 # TODO
 
-- So far only Tone mode is supported, add DTCS, etc...
+- So far only Tone and Tone SQL mode are supported, add DTCS, etc...
 - Better error handling
  
 # SOFAR
@@ -27,3 +27,6 @@ Chirp Export
 - Added basic argument parsing
 - Better code commenting
 - Add better csv writing
+- Added Tone SQL support
+- Now retains "holes" in the incoming CSV, retains CSV location numbers
+- Will skip any location "0" entries, ie anomolous Chirp CSV export from some radios.

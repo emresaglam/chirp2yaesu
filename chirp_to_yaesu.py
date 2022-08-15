@@ -29,7 +29,12 @@ else :
 with open(inputFile) as csvfile:
     reader = csv.DictReader(csvfile)
     for row in reader:
-        if row["Tone"] == "Tone" or (row['Frequency'] != None and row["Tone"] == ''):
+        if row["Location"] == "0":  # TD skip bad chirp CSV export defaults
+            continue
+        while numlines + 1 != int(row["Location"]): # TD skip missing lines in input, preserve holes!
+            numlines += 1
+            chirpFile = addEmptyLine(chirpFile, numlines)
+        if row["Tone"] in ("Tone", "TSQL") or (row['Frequency'] != None and row["Tone"] == ''):
             numlines += 1
             ftline.append(str(numlines))
             ftline.append(row['Frequency'])
@@ -51,6 +56,8 @@ with open(inputFile) as csvfile:
             ftline.append(row['Name'][0:8])
             if row["Tone"] == "Tone" :
                 ftline.append("TONE ENC")
+            elif row["Tone"] == "TSQL" :
+                ftline.append("TONE SQL")
             else :
                 ftline.append("OFF")
             ftline.append(row['rToneFreq'] + " Hz")
